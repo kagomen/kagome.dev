@@ -1,8 +1,8 @@
-import { g, basket, chick, egg1, egg2, back } from "./canvas.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants.js';
+import { g, basket, egg1, egg2 } from "./canvas.js";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, PLAYER_WIDTH, PLAYER_Y, PLAYER_HEIGHT, BG_COLOR } from './constants.js';
 
 let basketX = 0;
-let timerId: number = 0;
+export let timerId: number = 0;
 let prob = 0.96;
 let eggs: { x: number; y: number; }[];
 let score = 0;
@@ -16,12 +16,13 @@ function init() {
   window.addEventListener('mousemove', (e) => {
     basketX = e.clientX;
   });
-  timerId = window.setInterval(tick, 100);
+  timerId = window.setInterval(draw, 60);
 }
 
-function tick() {
-  g?.drawImage(back, 0, 0);
-  g?.drawImage(basket, basketX - 50, 500);
+function draw() {
+  g!.fillStyle = BG_COLOR;
+  g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  g?.drawImage(basket, basketX - (PLAYER_WIDTH / 2), PLAYER_Y);
   if (Math.random() > prob) {
     eggs.push({ x: Math.random() * CANVAS_WIDTH, y: 1 });
   }
@@ -30,7 +31,8 @@ function tick() {
 
   eggs = eggs.filter(egg => {
     return (
-      egg.y < 400 || egg.y > 600 || egg.x < basketX - 50 || egg.x > basketX + 50
+      // プレイヤーがキャッチしたら配列に戻す
+      egg.y < PLAYER_Y - (PLAYER_HEIGHT / 2) || egg.y > CANVAS_HEIGHT || egg.x < basketX - (PLAYER_WIDTH / 2) || egg.x > basketX + (PLAYER_WIDTH / 2)
     );
   });
 
@@ -41,18 +43,16 @@ function tick() {
 
   g?.fillStyle ? 'green' : 'green';
 
-  g?.fillText(`Score: ${score}`, 400, 250);
+  g?.fillText(`Score: ${score}`, CANVAS_WIDTH * (80 / 100), CANVAS_HEIGHT * (10 / 100));
 
   eggs.forEach(egg => {
-    egg.y += egg.y * 0.1;
-    if (egg.y < 50) {
-      g?.drawImage(chick, egg.x, egg.y);
-    } else {
-      g?.drawImage(egg1, egg.x, egg.y);
-    }
+    egg.y += egg.y * 0.05;  // 落下速度を加速度的に上げる
+
+    g?.drawImage(egg1, egg.x, egg.y);
+
     if (egg.y > 550) {
       clearInterval(timerId);
-      g?.drawImage(egg2, egg.x - 50, 500);
+      g?.drawImage(egg2, egg.x, PLAYER_Y);
     }
   });
 }
