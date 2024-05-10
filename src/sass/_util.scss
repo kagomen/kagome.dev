@@ -1,8 +1,9 @@
 @font-face {
   font-family: friendlyscribbles;
-  src: url(assets/friendlyscribbles.ttf) format("truetype");
+  src: url("./assets/friendlyscribbles.ttf") format("truetype");
 }
 
 :root {
   --bg-color: #49bcc1;
+  --text-color: #ffffff;
 }
