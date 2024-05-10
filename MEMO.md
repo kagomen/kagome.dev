@@ -55,6 +55,11 @@
 - .!（非 null アサーション演算子）
   - その値が非 null かつ非 undefined であると明示する
 
+## JavaScript
+
+- getBoundingClientRect()
+  要素の情報(top, left, bottom, right の座標など)を得る
+
 ## Sass
 
 ```

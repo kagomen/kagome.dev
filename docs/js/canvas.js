@@ -9,3 +9,5 @@ export const rainImg = new Image();
 rainImg.src = './assets/game-img/rain.png';
 export const afterRainImg = new Image();
 afterRainImg.src = './assets/game-img/after_rain.png';
+export const saltImg = new Image();
+saltImg.src = './assets/game-img/salt.png';

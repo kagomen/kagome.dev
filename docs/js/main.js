@@ -1,5 +1,5 @@
 import { g, playerImg, rainImg, afterRainImg } from "./canvas.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, PLAYER_WIDTH, PLAYER_Y, PLAYER_HEIGHT, BG_COLOR, PLAYER_CATCH_WIDTH } from './constants.js';
+import { CANVAS_WIDTH, CANVAS_HEIGHT, PLAYER_WIDTH, PLAYER_Y, PLAYER_HEIGHT, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT } from './constants.js';
 let playerX = 0;
 export let timerId = 0;
 let prob = 0.96;
@@ -38,7 +38,7 @@ function draw() {
     raindrops.forEach(rain => {
         rain.y += rain.y * 0.05; // 落下速度を加速度的に上げる
         g?.drawImage(rainImg, rain.x, rain.y, 24, 24);
-        if (rain.y > PLAYER_Y + (PLAYER_HEIGHT / 2)) {
+        if (rain.y > PLAYER_Y + (PLAYER_CATCH_HEIGHT / 2)) {
             clearInterval(timerId);
             g?.drawImage(afterRainImg, rain.x, PLAYER_Y, 24, 24);
         }

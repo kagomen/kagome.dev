@@ -1,4 +1,4 @@
-import { g, playerImg, rainImg, afterRainImg } from "./canvas.js";
+import { g, playerImg, rainImg, afterRainImg, saltImg } from "./canvas.js";
 import { CANVAS_WIDTH, CANVAS_HEIGHT, PLAYER_WIDTH, PLAYER_Y, PLAYER_HEIGHT, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT } from './constants.js';
 
 let playerX = 0;
@@ -50,7 +50,7 @@ function draw() {
 
     g?.drawImage(rainImg, rain.x, rain.y, 24, 24);
 
-    if (rain.y > PLAYER_Y + (PLAYER_HEIGHT / 2)) {
+    if (rain.y > PLAYER_Y + (PLAYER_CATCH_HEIGHT / 2)) {
       clearInterval(timerId);
       g?.drawImage(afterRainImg, rain.x, PLAYER_Y, 24, 24);
     }
