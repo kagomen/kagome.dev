@@ -22,7 +22,7 @@ function init() {
 function draw() {
   g!.fillStyle = BG_COLOR;
   g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-  g?.drawImage(basket, basketX - (PLAYER_WIDTH / 2), PLAYER_Y);
+  g?.drawImage(basket, basketX - (PLAYER_WIDTH / 2), PLAYER_Y, 32, 32);
   if (Math.random() > prob) {
     eggs.push({ x: Math.random() * CANVAS_WIDTH, y: 1 });
   }
@@ -41,18 +41,17 @@ function draw() {
     prob -= 0.001;
   }
 
-  g?.fillStyle ? 'green' : 'green';
-
+  g!.fillStyle = 'white';
   g?.fillText(`Score: ${score}`, CANVAS_WIDTH * (80 / 100), CANVAS_HEIGHT * (10 / 100));
 
   eggs.forEach(egg => {
     egg.y += egg.y * 0.05;  // 落下速度を加速度的に上げる
 
-    g?.drawImage(egg1, egg.x, egg.y);
+    g?.drawImage(egg1, egg.x, egg.y, 24, 24);
 
     if (egg.y > 550) {
       clearInterval(timerId);
-      g?.drawImage(egg2, egg.x, PLAYER_Y);
+      g?.drawImage(egg2, egg.x, PLAYER_Y, 24, 24);
     }
   });
 }
