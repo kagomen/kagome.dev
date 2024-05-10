@@ -1,5 +1,44 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  user-select: none;
+}
+
+*:focus {
+  outline: none;
+}
+
+@font-face {
+  font-family: friendlyscribbles;
+  src: url(assets/friendlyscribbles.ttf) format("truetype");
+}
+#about {
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+}
+#about h2 {
+  font-size: 32px;
+}
+#about p {
+  font-size: 24px;
+}
+#about #links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+#about #links a {
+  font-size: 18px;
+  color: white;
+  text-decoration: underline;
+}
+
 body {
   background: grey;
+  font-family: friendlyscribbles;
 }
 
 canvas {

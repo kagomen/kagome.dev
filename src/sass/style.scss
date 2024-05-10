@@ -1,9 +1,5 @@
 @charset "utf-8";
-
-body {
-  background: grey;
-}
-
-canvas {
-  background: white;
-}
+@use "reset";
+@use "util";
+@use "about";
+@use "main";
