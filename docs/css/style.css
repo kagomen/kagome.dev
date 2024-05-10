@@ -13,6 +13,10 @@
   font-family: friendlyscribbles;
   src: url(assets/friendlyscribbles.ttf) format("truetype");
 }
+:root {
+  --bg-color: #49bcc1;
+}
+
 #about {
   width: fit-content;
   margin: 0 auto;
@@ -37,12 +41,14 @@
 }
 
 body {
-  background: grey;
+  background: var(--bg-color);
   font-family: friendlyscribbles;
 }
 
 canvas {
-  background: white;
+  display: block;
+  margin: 64px auto;
+  border: 1px solid white;
 }
 
 /*# sourceMappingURL=style.css.map */

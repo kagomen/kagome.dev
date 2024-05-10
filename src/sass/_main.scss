@@ -1,8 +1,10 @@
 body {
-  background: grey;
+  background: var(--bg-color);
   font-family: friendlyscribbles;
 }
 
 canvas {
-  background: white;
+  display: block;
+  margin: 64px auto;
+  border: 1px solid white;
 }

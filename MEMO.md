@@ -47,9 +47,13 @@
   - 参考: https://qiita.com/masato_makino/items/8451bf4e62ad27823af1#import%E3%81%A8%E6%8B%A1%E5%BC%B5%E5%AD%90
 
 - setInterval の戻り値の型の問題
+
   - CommonJS にも setInterval があるため、`setInterval()`の戻り値を Number 型で指定するとエラーが出る（CommonJS では NodeJS.Timer 型）
   - `window.setInterval();`とすることで ESModule であると宣言することとなり、戻り値を Number 型にしてもエラーが出なくなる
   - 参考: https://blog.kubosho.com/entries/setinterval-trap-on-typescript
+
+- .!（非 null アサーション演算子）
+  - その値が非 null かつ非 undefined であると明示する
 
 ## Sass
 
