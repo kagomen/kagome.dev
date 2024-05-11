@@ -1,9 +1,9 @@
 import { g, loveImg, playerImg, rainImg, ripImg, saltImg } from "./canvas.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, gameClearTime } from './constants.js';
+import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, gameClearTime, saltFallingSpeed, rainFallingSpeed } from './constants.js';
 let playerX = CANVAS_WIDTH / 2;
-export let timerId = 0;
+let timerId = 0;
 let rainProb = 0.8;
-let saltProb = 0.8;
+let saltProb = 0.6;
 let raindrops;
 let salts;
 let hpStatus = 10;
@@ -16,13 +16,14 @@ function init() {
     salts = [];
     startTime = Date.now();
     timerId = window.setInterval(draw, 60);
+    updatePlayerX();
 }
 function draw() {
     // 背景を描画
     g.fillStyle = BG_COLOR;
     g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     // プレーヤーを描画
-    updatePlayerX();
+    // updatePlayerX();
     g?.drawImage(playerImg, playerX - (IMAGE_SIZE / 2), PLAYER_Y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
     updateRain();
     updateSalt();
@@ -47,13 +48,21 @@ function draw() {
     }
 }
 function updatePlayerX() {
-    window.addEventListener('mousemove', (e) => {
-        playerX = e.clientX - document.getElementById('canvas').getBoundingClientRect().left;
+    window.addEventListener('keydown', (e) => {
         if (playerX <= IMAGE_SIZE / 2) {
             playerX = IMAGE_SIZE / 2;
         }
         if (playerX >= CANVAS_WIDTH - IMAGE_SIZE / 2) {
             playerX = CANVAS_WIDTH - IMAGE_SIZE / 2;
+        }
+        if (e.code === 'ArrowLeft') {
+            playerX -= 6;
+        }
+        else if (e.code === 'ArrowRight') {
+            playerX += 6;
+        }
+        else {
+            return;
         }
     });
 }
@@ -69,7 +78,7 @@ function updateRain() {
     });
     if (prev !== raindrops.length) {
         hpStatus += 1;
-        rainProb -= 0.1;
+        rainProb += 0.01;
     }
 }
 function updateSalt() {
@@ -84,18 +93,18 @@ function updateSalt() {
     });
     if (prev !== salts.length) {
         hpStatus -= 3;
-        saltProb -= 0.1;
+        saltProb -= 0.2;
     }
 }
 function drawRain() {
     raindrops.forEach(rain => {
-        rain.y += rain.y * 0.15; // 落下速度を加速度的に上げる
+        rain.y += rain.y * rainFallingSpeed;
         g?.drawImage(rainImg, rain.x - (IMAGE_SIZE / 2), rain.y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
     });
 }
 function drawSalt() {
     salts.forEach(salt => {
-        salt.y += salt.y * 0.15; // 落下速度を加速度的に上げる
+        salt.y += salt.y * saltFallingSpeed;
         g?.drawImage(saltImg, salt.x - (IMAGE_SIZE / 2), salt.y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
     });
 }

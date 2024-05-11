@@ -1,6 +1,7 @@
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants.js';
 const canvas = document.getElementById('canvas');
-const dpr = window.devicePixelRatio || 1; // dprに対応していないPCの場合、1を返す
+// 高解像度化
+const dpr = window.devicePixelRatio || 1;
 canvas.width = CANVAS_WIDTH * dpr;
 canvas.height = CANVAS_HEIGHT * dpr;
 export const g = canvas.getContext('2d');
