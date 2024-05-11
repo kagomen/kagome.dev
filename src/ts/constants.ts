@@ -8,3 +8,4 @@ export const BG_COLOR = '#49BCC1';
 export const gameClearTime = 10;
 export const rainFallingSpeed = 0.3;
 export const saltFallingSpeed = 0.18;
+export const initialHpStatus = 10;

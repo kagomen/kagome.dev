@@ -1,5 +1,5 @@
 import { g, loveImg, playerImg, rainImg, ripImg, saltImg } from "./canvas.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, gameClearTime, saltFallingSpeed, rainFallingSpeed } from './constants.js';
+import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, gameClearTime, saltFallingSpeed, rainFallingSpeed, initialHpStatus } from './constants.js';
 let playerX = CANVAS_WIDTH / 2;
 let timerId = 0;
 let rainProb = 0.8;
@@ -23,15 +23,18 @@ function draw() {
     g.fillStyle = BG_COLOR;
     g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     // プレーヤーを描画
-    // updatePlayerX();
     g?.drawImage(playerImg, playerX - (IMAGE_SIZE / 2), PLAYER_Y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
+    // HPバーを描画
+    g.strokeStyle = 'white';
+    g.lineWidth = 2;
+    const rectWidth = IMAGE_SIZE * 1.2;
+    g?.strokeRect(playerX - (rectWidth / 2), PLAYER_Y + 20, rectWidth, IMAGE_SIZE * 0.15);
     updateRain();
     updateSalt();
-    // スコア表示
-    g.font = "10px MenuCard, sans-serif";
-    g.fillStyle = 'white';
-    g?.fillText(`HP: ${hpStatus}`, CANVAS_WIDTH * (80 / 100), CANVAS_HEIGHT * (10 / 100));
-    // タイム表示
+    // 残りHPを描画
+    g.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    g?.fillRect(playerX - (rectWidth / 2), PLAYER_Y + 20, rectWidth * (hpStatus / 10), IMAGE_SIZE * 0.15);
+    // タイムを描画
     g.font = "32px MenuCard, sans-serif";
     g.textAlign = 'center';
     const elapsedTime = gameClearTime - Math.floor((Date.now() - startTime) / 1000);
@@ -79,8 +82,13 @@ function updateRain() {
         rain.y < PLAYER_Y - (IMAGE_SIZE / 2) || rain.y > CANVAS_HEIGHT || rain.x < playerX - (IMAGE_SIZE / 2) || rain.x > playerX + (IMAGE_SIZE / 2));
     });
     if (prev !== raindrops.length) {
-        hpStatus += 1;
         rainProb += 0.01;
+        if (hpStatus > initialHpStatus) {
+            hpStatus = 10;
+        }
+        else {
+            hpStatus += 1;
+        }
     }
 }
 function updateSalt() {
