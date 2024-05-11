@@ -62,14 +62,12 @@
 
 ## Canvas
 
-- フォントの読み込み
-  ```
-  const font = new FontFace("フォント名", "WebフォントのURL or バイナリフォントデータ");  // FontFaceオブジェクトを作成
-  await font.load(); // フォントがロードされるまで待つ
-  document.fonts.add(font); // FontFaceSetにFontFaceを追加
-  let f = new FontFace("test", "url(x)");
-  ```
-  - 参考: https://zenn.dev/cococig/articles/1d494847985263
+- フォントの使用
+
+  - CSS の`@font-face`で読み込んだフォントを使用できる
+
+- テキストの中央寄せ
+  - `g.textAlign = "center";`
 
 ## Sass
 
@@ -88,6 +86,13 @@ npm i -D sass
 ```
 npm run sass
 ```
+
+## Git
+
+- ファイル更新が反映されない => キャッシュの削除
+  ```
+  git rm -r --cached .
+  ```
 
 ## 命名規則
 

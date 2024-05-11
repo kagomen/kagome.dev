@@ -1,5 +1,5 @@
-import { g, playerImg, rainImg, ripImg, saltImg } from "./canvas.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT } from './constants.js';
+import { g, loveImg, playerImg, rainImg, ripImg, saltImg } from "./canvas.js";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT, gameClearTime } from './constants.js';
 
 let playerX = 0;
 export let timerId: number = 0;
@@ -49,9 +49,16 @@ function draw() {
   drawRain();
   drawSalt();
 
+  // ゲームオーバー判定
   if (hpStatus < 1) {
     clearInterval(timerId);
     drawGameOver();
+  }
+
+  // クリア判定
+  if (elapsedTime >= gameClearTime) {
+    clearInterval(timerId);
+    drawGameClear();
   }
 }
 
@@ -119,4 +126,14 @@ function drawGameOver() {
   g!.textAlign = 'center';
   g?.fillText('GAME OVER', CANVAS_WIDTH * (50 / 100), CANVAS_HEIGHT * (40 / 100));
   g?.drawImage(ripImg, (CANVAS_WIDTH - IMAGE_SIZE) / 2, CANVAS_HEIGHT / 2, IMAGE_SIZE, IMAGE_SIZE);
+}
+
+function drawGameClear() {
+  g!.fillStyle = BG_COLOR;
+  g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  g!.font = "12px MenuCard, sans-serif";
+  g!.fillStyle = 'white';
+  g!.textAlign = 'center';
+  g?.fillText('GAME CLEAR!', CANVAS_WIDTH * (50 / 100), CANVAS_HEIGHT * (40 / 100));
+  g?.drawImage(loveImg, (CANVAS_WIDTH - IMAGE_SIZE) / 2, CANVAS_HEIGHT / 2, IMAGE_SIZE, IMAGE_SIZE);
 }

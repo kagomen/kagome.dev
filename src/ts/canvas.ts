@@ -24,5 +24,6 @@ saltImg.src = './assets/game-img/salt.png';
 export const ripImg = new Image();
 ripImg.src = './assets/game-img/rip.png';
 
-
+export const loveImg = new Image();
+loveImg.src = './assets/game-img/love.png';
 
