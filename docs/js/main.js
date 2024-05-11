@@ -15,9 +15,6 @@ function init() {
     raindrops = [];
     salts = [];
     startTime = Date.now();
-    window.addEventListener('mousemove', (e) => {
-        playerX = e.clientX - document.getElementById('canvas').getBoundingClientRect().left;
-    });
     timerId = window.setInterval(draw, 60);
 }
 function draw() {
@@ -25,6 +22,7 @@ function draw() {
     g.fillStyle = BG_COLOR;
     g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     // プレーヤーを描画
+    updatePlayerX();
     g?.drawImage(playerImg, playerX - (IMAGE_SIZE / 2), PLAYER_Y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
     updateRain();
     updateSalt();
@@ -47,6 +45,17 @@ function draw() {
         clearInterval(timerId);
         drawGameClear();
     }
+}
+function updatePlayerX() {
+    window.addEventListener('mousemove', (e) => {
+        playerX = e.clientX - document.getElementById('canvas').getBoundingClientRect().left;
+        if (playerX <= IMAGE_SIZE / 2) {
+            playerX = IMAGE_SIZE / 2;
+        }
+        if (playerX >= CANVAS_WIDTH - IMAGE_SIZE / 2) {
+            playerX = CANVAS_WIDTH - IMAGE_SIZE / 2;
+        }
+    });
 }
 function updateRain() {
     if (Math.random() > rainProb) {
