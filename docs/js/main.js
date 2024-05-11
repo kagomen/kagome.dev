@@ -1,5 +1,5 @@
-import { g, playerImg, rainImg, afterRainImg } from "./canvas.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, PLAYER_WIDTH, PLAYER_Y, PLAYER_HEIGHT, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT } from './constants.js';
+import { g, playerImg, rainImg } from "./canvas.js";
+import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT } from './constants.js';
 let playerX = 0;
 export let timerId = 0;
 let prob = 0.96;
@@ -18,7 +18,7 @@ function init() {
 function draw() {
     g.fillStyle = BG_COLOR;
     g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    g?.drawImage(playerImg, playerX - (PLAYER_WIDTH / 2), PLAYER_Y, PLAYER_WIDTH, PLAYER_HEIGHT);
+    g?.drawImage(playerImg, playerX - (IMAGE_SIZE / 2), PLAYER_Y, IMAGE_SIZE, IMAGE_SIZE);
     if (Math.random() > prob) {
         raindrops.push({ x: Math.random() * CANVAS_WIDTH, y: 1 });
     }
@@ -26,7 +26,7 @@ function draw() {
     raindrops = raindrops.filter(rain => {
         return (
         // プレイヤーがキャッチしたら配列に戻す
-        rain.y < PLAYER_Y - (PLAYER_HEIGHT / 2) || rain.y > CANVAS_HEIGHT || rain.x < playerX - (PLAYER_CATCH_WIDTH / 2) || rain.x > playerX + (PLAYER_CATCH_WIDTH / 2));
+        rain.y < PLAYER_Y - (IMAGE_SIZE / 2) || rain.y > CANVAS_HEIGHT || rain.x < playerX - (PLAYER_CATCH_WIDTH / 2) || rain.x > playerX + (PLAYER_CATCH_WIDTH / 2));
     });
     if (prev !== raindrops.length) {
         score++;
@@ -37,10 +37,9 @@ function draw() {
     g?.fillText(`Score: ${score}`, CANVAS_WIDTH * (80 / 100), CANVAS_HEIGHT * (10 / 100));
     raindrops.forEach(rain => {
         rain.y += rain.y * 0.05; // 落下速度を加速度的に上げる
-        g?.drawImage(rainImg, rain.x, rain.y, 24, 24);
+        g?.drawImage(rainImg, rain.x, rain.y, IMAGE_SIZE, IMAGE_SIZE);
         if (rain.y > PLAYER_Y + (PLAYER_CATCH_HEIGHT / 2)) {
             clearInterval(timerId);
-            g?.drawImage(afterRainImg, rain.x, PLAYER_Y, 24, 24);
         }
     });
 }

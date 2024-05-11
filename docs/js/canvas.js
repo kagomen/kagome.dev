@@ -1,10 +1,14 @@
 import { CANVAS_WIDTH, CANVAS_HEIGHT } from './constants.js';
 const canvas = document.getElementById('canvas');
-canvas.width = CANVAS_WIDTH;
-canvas.height = CANVAS_HEIGHT;
+const dpr = window.devicePixelRatio || 1; // dprに対応していないPCの場合、1を返す
+canvas.width = CANVAS_WIDTH * dpr;
+canvas.height = CANVAS_HEIGHT * dpr;
 export const g = canvas.getContext('2d');
+g?.scale(dpr, dpr);
+canvas.style.width = `${CANVAS_WIDTH}px`;
+canvas.style.height = `${CANVAS_HEIGHT}px`;
 export const playerImg = new Image();
-playerImg.src = './assets/game-img/player.png';
+playerImg.src = './assets/game-img/katatsumuri.png';
 export const rainImg = new Image();
 rainImg.src = './assets/game-img/rain.png';
 export const afterRainImg = new Image();
