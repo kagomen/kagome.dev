@@ -32,8 +32,10 @@ function draw() {
     g.fillStyle = 'white';
     g?.fillText(`HP: ${hpStatus}`, CANVAS_WIDTH * (80 / 100), CANVAS_HEIGHT * (10 / 100));
     // タイム表示
-    const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-    g?.fillText(`TIME: ${elapsedTime}`, CANVAS_WIDTH * (10 / 100), CANVAS_HEIGHT * (10 / 100));
+    g.font = "32px MenuCard, sans-serif";
+    g.textAlign = 'center';
+    const elapsedTime = gameClearTime - Math.floor((Date.now() - startTime) / 1000);
+    g?.fillText(`${elapsedTime}`, CANVAS_WIDTH * (50 / 100), CANVAS_HEIGHT * (30 / 100));
     drawRain();
     drawSalt();
     // ゲームオーバー判定
@@ -42,7 +44,7 @@ function draw() {
         drawGameOver();
     }
     // クリア判定
-    if (elapsedTime >= gameClearTime) {
+    if (elapsedTime <= 0) {
         clearInterval(timerId);
         drawGameClear();
     }
