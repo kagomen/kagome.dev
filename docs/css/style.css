@@ -10,8 +10,8 @@
 }
 
 @font-face {
-  font-family: friendlyscribbles;
-  src: url("../assets/friendlyscribbles.ttf") format("truetype");
+  font-family: MenuCard;
+  src: url("../assets/MenuCard.ttf") format("truetype");
 }
 :root {
   --bg-color: #49bcc1;
@@ -20,32 +20,38 @@
 
 #about {
   width: fit-content;
-  margin: 0 auto;
+  margin: 24px auto;
   text-align: center;
   color: var(--text-color);
 }
 #about h2 {
-  font-size: 24px;
+  font-size: 16px;
 }
 #about p {
-  font-size: 16px;
-  margin-top: 4px;
+  font-size: 10px;
+  margin-top: 16px;
 }
 #about #links {
   display: flex;
   justify-content: center;
   gap: 24px;
-  margin-top: 24px;
+  margin-top: 16px;
 }
 #about #links a {
-  font-size: 16px;
+  font-size: 10px;
   color: var(--text-color);
   text-decoration: underline;
+}
+#about #social-links {
+  margin: 40px;
+}
+#about #social-links img {
+  width: 24px;
 }
 
 body {
   background: var(--bg-color);
-  font-family: friendlyscribbles;
+  font-family: MenuCard;
 }
 
 canvas {
