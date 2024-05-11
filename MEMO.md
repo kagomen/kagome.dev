@@ -60,6 +60,17 @@
 - getBoundingClientRect()
   要素の情報(top, left, bottom, right の座標など)を得る
 
+## Canvas
+
+- フォントの読み込み
+  ```
+  const font = new FontFace("フォント名", "WebフォントのURL or バイナリフォントデータ");  // FontFaceオブジェクトを作成
+  await font.load(); // フォントがロードされるまで待つ
+  document.fonts.add(font); // FontFaceSetにFontFaceを追加
+  let f = new FontFace("test", "url(x)");
+  ```
+  - 参考: https://zenn.dev/cococig/articles/1d494847985263
+
 ## Sass
 
 ```
