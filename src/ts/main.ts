@@ -8,6 +8,7 @@ let saltProb = 0.8;
 let raindrops: { x: number; y: number; }[];
 let salts: { x: number; y: number; }[];
 let hpStatus = 10;
+let startTime: number;
 
 window.addEventListener('load', () => {
   init();
@@ -16,6 +17,7 @@ window.addEventListener('load', () => {
 function init() {
   raindrops = [];
   salts = [];
+  startTime = Date.now();
   window.addEventListener('mousemove', (e) => {
     playerX = e.clientX - document.getElementById('canvas')!.getBoundingClientRect().left;
   });
@@ -32,7 +34,7 @@ function draw() {
   g?.drawImage(playerImg, playerX - (IMAGE_SIZE / 2), PLAYER_Y, IMAGE_SIZE, IMAGE_SIZE);
 
 
-  // updateRain();
+  updateRain();
   updateSalt();
 
   // スコア表示
@@ -40,7 +42,11 @@ function draw() {
   g!.fillStyle = 'white';
   g?.fillText(`HP: ${hpStatus}`, CANVAS_WIDTH * (80 / 100), CANVAS_HEIGHT * (10 / 100));
 
-  // drawRain();
+  // タイム表示
+  const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+  g?.fillText(`TIME: ${elapsedTime}`, CANVAS_WIDTH * (10 / 100), CANVAS_HEIGHT * (10 / 100));
+
+  drawRain();
   drawSalt();
 
   if (hpStatus < 1) {
