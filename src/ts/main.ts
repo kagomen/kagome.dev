@@ -1,7 +1,7 @@
 import { g, loveImg, playerImg, rainImg, ripImg, saltImg } from "./canvas.js";
-import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT, gameClearTime } from './constants.js';
+import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, gameClearTime } from './constants.js';
 
-let playerX = 0;
+let playerX = CANVAS_WIDTH / 2;
 export let timerId: number = 0;
 let rainProb = 0.8;
 let saltProb = 0.8;
@@ -31,7 +31,7 @@ function draw() {
   g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
   // プレーヤーを描画
-  g?.drawImage(playerImg, playerX - (IMAGE_SIZE / 2), PLAYER_Y, IMAGE_SIZE, IMAGE_SIZE);
+  g?.drawImage(playerImg, playerX - (IMAGE_SIZE / 2), PLAYER_Y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
 
 
   updateRain();
@@ -72,7 +72,7 @@ function updateRain() {
   raindrops = raindrops.filter(rain => {
     return (
       // プレイヤーがキャッチしたら配列に戻す
-      rain.y < PLAYER_Y - (PLAYER_CATCH_HEIGHT / 2) || rain.y > CANVAS_HEIGHT || rain.x < playerX - (PLAYER_CATCH_WIDTH / 2) || rain.x > playerX + (PLAYER_CATCH_WIDTH / 2)
+      rain.y < PLAYER_Y - (IMAGE_SIZE / 2) || rain.y > CANVAS_HEIGHT || rain.x < playerX - (IMAGE_SIZE / 2) || rain.x > playerX + (IMAGE_SIZE / 2)
     );
   });
 
@@ -92,7 +92,7 @@ function updateSalt() {
   salts = salts.filter(salt => {
     return (
       // プレイヤーがキャッチしたら配列に戻す
-      salt.y < PLAYER_Y - (PLAYER_CATCH_HEIGHT / 2) || salt.y > CANVAS_HEIGHT || salt.x < playerX - (IMAGE_SIZE / 2) || salt.x > playerX + (IMAGE_SIZE / 2)
+      salt.y < PLAYER_Y - (IMAGE_SIZE / 2) || salt.y > CANVAS_HEIGHT || salt.x < playerX - (IMAGE_SIZE / 2) || salt.x > playerX + (IMAGE_SIZE / 2)
     );
   });
 
@@ -106,7 +106,7 @@ function drawRain() {
   raindrops.forEach(rain => {
     rain.y += rain.y * 0.15;  // 落下速度を加速度的に上げる
 
-    g?.drawImage(rainImg, rain.x, rain.y, IMAGE_SIZE, IMAGE_SIZE);
+    g?.drawImage(rainImg, rain.x - (IMAGE_SIZE / 2), rain.y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
   });
 }
 
@@ -114,7 +114,7 @@ function drawSalt() {
   salts.forEach(salt => {
     salt.y += salt.y * 0.15;  // 落下速度を加速度的に上げる
 
-    g?.drawImage(saltImg, salt.x, salt.y, IMAGE_SIZE, IMAGE_SIZE);
+    g?.drawImage(saltImg, salt.x - (IMAGE_SIZE / 2), salt.y - (IMAGE_SIZE / 2), IMAGE_SIZE, IMAGE_SIZE);
   });
 }
 
