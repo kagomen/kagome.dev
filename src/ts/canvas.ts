@@ -21,5 +21,8 @@ afterRainImg.src = './assets/game-img/after_rain.png';
 export const saltImg = new Image();
 saltImg.src = './assets/game-img/salt.png';
 
+export const ripImg = new Image();
+ripImg.src = './assets/game-img/rip.png';
+
 
 

@@ -1,4 +1,4 @@
-import { g, playerImg, rainImg, saltImg } from "./canvas.js";
+import { g, playerImg, rainImg, ripImg, saltImg } from "./canvas.js";
 import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, PLAYER_CATCH_WIDTH, PLAYER_CATCH_HEIGHT } from './constants.js';
 
 let playerX = 0;
@@ -36,7 +36,7 @@ function draw() {
   updateSalt();
 
   // スコア表示
-  g!.font = "12px friendlyscribbles, sans-serif";
+  g!.font = "10px MenuCard, sans-serif";
   g!.fillStyle = 'white';
   g?.fillText(`HP: ${hpStatus}`, CANVAS_WIDTH * (80 / 100), CANVAS_HEIGHT * (10 / 100));
 
@@ -45,6 +45,7 @@ function draw() {
 
   if (hpStatus < 1) {
     clearInterval(timerId);
+    drawGameOver();
   }
 }
 
@@ -102,4 +103,14 @@ function drawSalt() {
 
     g?.drawImage(saltImg, salt.x, salt.y, IMAGE_SIZE, IMAGE_SIZE);
   });
+}
+
+function drawGameOver() {
+  g!.fillStyle = BG_COLOR;
+  g?.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+  g!.font = "12px MenuCard, sans-serif";
+  g!.fillStyle = 'white';
+  g!.textAlign = 'center';
+  g?.fillText('GAME OVER', CANVAS_WIDTH * (50 / 100), CANVAS_HEIGHT * (40 / 100));
+  g?.drawImage(ripImg, (CANVAS_WIDTH - IMAGE_SIZE) / 2, CANVAS_HEIGHT / 2, IMAGE_SIZE, IMAGE_SIZE);
 }
