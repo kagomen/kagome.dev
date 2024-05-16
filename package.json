@@ -1,21 +1,15 @@
 {
   "name": "kagome.dev",
-  "version": "1.0.0",
-  "description": "kagome's personal website",
-  "main": "index.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "sass src/sass/style.scss docs/css/style.css --watch",
-    "dev": "tsc -w"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
-  "keywords": [],
-  "author": "kagome",
-  "license": "MIT",
   "devDependencies": {
-    "@types/howler": "^2.2.11",
-    "@types/node": "^20.12.11",
-    "howler": "^2.2.4",
-    "sass": "^1.77.0",
-    "typescript": "^5.4.5"
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
   }
 }

@@ -11,11 +11,9 @@ let salts: { x: number; y: number; }[];
 let hpStatus = 10;
 let startTime: number;
 
-window.addEventListener('load', () => {
-  init();
-});
 
-function init() {
+
+export function init() {
   raindrops = [];
   salts = [];
   startTime = Date.now();
