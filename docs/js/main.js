@@ -1,6 +1,6 @@
 import { g, loveImg, playerImg, rainImg, ripImg, saltImg } from "./canvas.js";
 import { CANVAS_WIDTH, CANVAS_HEIGHT, IMAGE_SIZE, PLAYER_Y, BG_COLOR, gameClearTime, saltFallingSpeed, rainFallingSpeed, initialHpStatus } from './constants.js';
-import { gameClearSound } from "./sound.js";
+import { gameClearSound, gameOverSound, hpUpSound, hpDownSound } from "./sound.js";
 let playerX = CANVAS_WIDTH / 2;
 let timerId = 0;
 let rainProb = 0.8;
@@ -46,12 +46,13 @@ function draw() {
     if (hpStatus < 1) {
         clearInterval(timerId);
         drawGameOver();
-        gameClearSound.play();
+        gameOverSound.play();
     }
     // クリア判定
     if (elapsedTime <= 0) {
         clearInterval(timerId);
         drawGameClear();
+        gameClearSound.play();
     }
 }
 function updatePlayerX() {
@@ -90,6 +91,7 @@ function updateRain() {
         }
         else {
             hpStatus += 1;
+            hpUpSound.play();
         }
     }
 }
@@ -106,6 +108,7 @@ function updateSalt() {
     if (prev !== salts.length) {
         hpStatus -= 3;
         saltProb -= 0.2;
+        hpDownSound.play();
     }
 }
 function drawRain() {
