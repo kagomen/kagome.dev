@@ -60,6 +60,26 @@
 - getBoundingClientRect()
   要素の情報(top, left, bottom, right の座標など)を得る
 
+- DOMContentLoaded イベント
+
+  - ページのロード・解析を終えたタイミングでコードを実行する
+
+- load イベント
+
+  - ページの解析・画像・スタイルシートなど、付随する全コンテンツのロードを終えたタイミングで実行する
+
+- defer 属性
+
+  - 非同期で js ファイルをロード、ページのロード・解析が終わったタイミングで js ファイルを実行
+  - `type="module"`にした場合、defer 属性は記載せずとも自動的に付与される
+
+- 再エクスポート
+  - 複数のモジュールをまとめて export する中核のモジュールを作る
+  ```
+  export {hoge} from './hoge.js';
+  export {fuga} from './fuga.js';
+  ```
+
 ## Canvas
 
 - フォントの使用
@@ -87,12 +107,16 @@ npm i -D sass
 npm run sass
 ```
 
-## Git
+## Git / GitHub
 
 - ファイル更新が反映されない => キャッシュの削除
   ```
   git rm -r --cached .
   ```
+
+### GitHub CLI
+
+- gh repo create
 
 ## 命名規則
 

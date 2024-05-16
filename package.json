@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "kagome's personal website",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "sass src/sass/style.scss docs/css/style.css --watch",
@@ -13,7 +12,9 @@
   "author": "kagome",
   "license": "MIT",
   "devDependencies": {
+    "@types/howler": "^2.2.11",
     "@types/node": "^20.12.11",
+    "howler": "^2.2.4",
     "sass": "^1.77.0",
     "typescript": "^5.4.5"
   }
