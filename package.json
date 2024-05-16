@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "sass": "sass src/sass/style.scss docs/css/style.css --watch",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "build": "tsc && sass src/sass/style.scss docs/css/style.css"
   },
   "keywords": [],
   "author": "kagome",
